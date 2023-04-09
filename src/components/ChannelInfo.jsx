@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function ChannelInfo({ id, name }) {
   const { youtube } = useYoutubeApi();
-  const { data: url } = useQuery(["channels", id], () =>
-    youtube.channelImageURL(id)
+  const { data: url } = useQuery(
+    ["channels", id],
+    () => youtube.channelImageURL(id),
+    { staleTime: 1000 * 60 * 5 }
   );
   return (
     <div className="flex items-center my-4 mb-8">
